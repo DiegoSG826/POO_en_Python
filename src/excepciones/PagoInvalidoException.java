@@ -1,6 +1,6 @@
-package src.excepciones;
+package excepciones;
 
-public class PagoInvalidoException extends Exception {
+public class PagoInvalidoException extends RuntimeException {
     public PagoInvalidoException(String mensaje) {
         super(mensaje);
     }

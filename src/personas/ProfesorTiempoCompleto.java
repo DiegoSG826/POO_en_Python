@@ -1,9 +1,11 @@
-package src.personas;
+package personas;
+import excepciones.PagoInvalidoException;
+import interfaces.Pagable;
 
 public class ProfesorTiempoCompleto extends Persona implements Pagable {
     private double salarioMensual;
 
-    public ProfesorTiempoCompleto(String nombre, String id, double salarioMensual) {
+    public ProfesorTiempoCompleto(String nombre, String id, double salarioMensual) throws PagoInvalidoException {
         super(nombre, id);
         if (salarioMensual <= 0) throw new PagoInvalidoException("Salario mensual inválido.");
         this.salarioMensual = salarioMensual;

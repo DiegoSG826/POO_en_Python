@@ -1,16 +1,4 @@
-package src.personas;
-
-interface Pagable {
-    double calcularPago();
-}
-
-interface Calificable {
-    double calcularPromedio();
-}
-
-// ========================
-// CLASE ABSTRACTA PERSONA
-// ========================
+package personas;
 
 public abstract class Persona {
     protected String nombre;
