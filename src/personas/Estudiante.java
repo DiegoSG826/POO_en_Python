@@ -1,9 +1,10 @@
-package src.personas;
-
+package personas;
+import excepciones.PromedioInvalidoException;
+import interfaces.Calificable;
 import java.util.List;
 
 public class Estudiante extends Persona implements Calificable {
-    private List<Double> calificaciones;
+    private final List<Double> calificaciones;
 
     public Estudiante(String nombre, String id, List<Double> calificaciones) {
         super(nombre, id);

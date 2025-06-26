@@ -1,4 +1,7 @@
-package src.personas;
+package personas;
+import excepciones.PagoInvalidoException;
+import interfaces.Pagable;
+
 
 public class ProfesorPorHoras extends Persona implements Pagable {
     private int horasTrabajadas;

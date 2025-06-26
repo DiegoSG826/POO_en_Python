@@ -1,7 +1,9 @@
-package src.excepciones;
+package excepciones;
 
-public class PromedioInvalidoException extends Exception {
-    public PromedioInvalidoException(String mensaje) {
-        super(mensaje);
-    }
+
+public class PromedioInvalidoException extends RuntimeException {
+public PromedioInvalidoException(String mensaje) {
+	super(mensaje);
 }
+}
+
