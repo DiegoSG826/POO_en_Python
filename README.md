@@ -72,5 +72,5 @@ La institución requiere un sistema para registrar profesores y estudiantes, as�
 
 ---
 
-## 📁 Estructura del Proyecto
+##Estructura del Proyecto
 
