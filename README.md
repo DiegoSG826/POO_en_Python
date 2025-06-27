@@ -132,6 +132,15 @@ if (calificaciones.isEmpty()) throw new PromedioInvalidoException("No hay califi
 ## Ejemplo de Ejecución en Java (Main.java)
 
 ```java
+import curso.Curso;
+import excepciones.PagoInvalidoException;
+import excepciones.PromedioInvalidoException;
+import java.util.Arrays;
+import java.util.List;
+import personas.Estudiante;
+import personas.ProfesorPorHoras;
+import personas.ProfesorTiempoCompleto;
+
 public class Main {
     public static void main(String[] args) {
         try {
@@ -143,19 +152,12 @@ public class Main {
 
             List<Estudiante> estudiantes = Arrays.asList(est1, est2);
 
-            Curso curso1 = new Curso("Programación OO", estudiantes, profTC);
+            Curso curso1 = new Curso("Programacion OO", estudiantes, profTC);
             Curso curso2 = new Curso("Bases de Datos", estudiantes, profPH);
 
             curso1.mostrarInformacionCurso();
             System.out.println();
             curso2.mostrarInformacionCurso();
-
-            System.out.println("\nPagos y promedios:");
-            System.out.println(profTC.getNombre() + " - Pago: $" + profTC.calcularPago());
-            System.out.println(profPH.getNombre() + " - Pago: $" + profPH.calcularPago());
-
-            System.out.println(est1.getNombre() + " - Promedio: " + est1.calcularPromedio());
-            System.out.println(est2.getNombre() + " - Promedio: " + est2.calcularPromedio());
 
         } catch (PagoInvalidoException | PromedioInvalidoException e) {
             System.err.println("Error: " + e.getMessage());
