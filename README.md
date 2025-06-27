@@ -1,13 +1,13 @@
 # POO_en_Python
-#Sistema de Gestión de Cursos Académicos Multilenguaje (Java → Python)
+# Sistema de Gestión de Cursos Académicos Multilenguaje (Java → Python)
 
-##Descripción General
+## Descripción General
 
 Este proyecto tiene como objetivo desarrollar un sistema de gestión académica en dos lenguajes de programación (Java y Python), aplicando conceptos fundamentales de la Programación Orientada a Objetos (POO), tales como clases, encapsulamiento, herencia, polimorfismo, interfaces y manejo de excepciones personalizadas.
 
 ---
 
-##Objetivos
+## Objetivos
 
 - Desarrollar un sistema completo utilizando **Programación Orientada a Objetos (POO)**.
 - Aplicar los conceptos clave de POO:
@@ -22,7 +22,7 @@ Este proyecto tiene como objetivo desarrollar un sistema de gestión académica 
 
 ---
 
-##Escenario del problema
+## Escenario del problema
 
 La institución requiere un sistema para registrar profesores y estudiantes, así como administrar los cursos donde interactúan. El sistema debe:
 
@@ -33,7 +33,7 @@ La institución requiere un sistema para registrar profesores y estudiantes, as�
 
 ---
 
-##Requerimientos Funcionales
+## Requerimientos Funcionales
 
 ### 1. Clases e Interfaces
 
@@ -72,5 +72,5 @@ La institución requiere un sistema para registrar profesores y estudiantes, as�
 
 ---
 
-##Estructura del Proyecto
+## Estructura del Proyecto
 
