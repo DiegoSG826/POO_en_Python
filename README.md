@@ -119,9 +119,7 @@ for (Persona p : personas) {
 }
 ```
 
-Los objetos `profTC`, `profPH`, `est1`, `est2` son instancias de clases hijas pero tratados como tipo base `Persona`.
 
----
 
 ### 3. Excepciones Personalizadas
 
@@ -136,15 +134,6 @@ public class PagoInvalidoException extends RuntimeException {
     }
 }
 ```
-
-#### Uso:
-
-```java
-if (salarioMensual <= 0) throw new PagoInvalidoException("Pago inválido");
-if (calificaciones.isEmpty()) throw new PromedioInvalidoException("No hay calificaciones");
-```
-
----
 
 ## Ejemplo de Ejecución en Java (Main.java)
 
