@@ -45,15 +45,6 @@ El sistema debe:
 * `Pagable` → `calcularPago()` (profesores)
 * `Calificable` → `calcularPromedio()` (estudiantes)
 
-#### Clase abstracta:
-
-```java
-public abstract class Persona {
-    protected String nombre;
-    protected String id;
-    // Constructor y getters
-}
-```
 
 #### Subclases de Persona:
 
