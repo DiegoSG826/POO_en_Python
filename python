@@ -1,0 +1,29 @@
+#codigo python
+from curso.curso import Curso
+from excepciones.excepciones import PagoInvalidoException, PromedioInvalidoException
+from personas.estudiante import Estudiante
+from personas.profesor_tiempo_completo import ProfesorTiempoCompleto
+from personas.profesor_por_horas import ProfesorPorHoras
+
+def main():
+    try:
+        prof_tc = ProfesorTiempoCompleto("Ana", "P001", 15000)
+        prof_ph = ProfesorPorHoras("Luis", "P002", 40, 200)
+
+        est1 = Estudiante("Carlos", "E001", [8.5, 9.0, 7.5])
+        est2 = Estudiante("Maria", "E002", [9.5, 8.0, 10.0])
+
+        estudiantes = [est1, est2]
+
+        curso1 = Curso("Programacion OO", estudiantes, prof_tc)
+        curso2 = Curso("Bases de Datos", estudiantes, prof_ph)
+
+        curso1.mostrar_informacion_curso()
+        print()
+        curso2.mostrar_informacion_curso()
+
+    except (PagoInvalidoException, PromedioInvalidoException) as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
