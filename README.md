@@ -172,6 +172,11 @@ public class Main {
 }
 ```
 
+## Captura del funcionamiento
+![image](https://github.com/user-attachments/assets/5cb20170-b7e4-4df0-8ecc-93fa98d4eaeb)
+
+
+
 
 
 
