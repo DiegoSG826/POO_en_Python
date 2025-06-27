@@ -58,33 +58,59 @@ public abstract class Persona {
 #### Subclases de Persona:
 
 ```java
-public class ProfesorTiempoCompleto extends Persona implements Pagable {
-    private double salarioMensual;
-    // calcularPago() lanza PagoInvalidoException
-}
+package personas;
 
-public class ProfesorPorHoras extends Persona implements Pagable {
-    private int horasTrabajadas;
-    private double pagoPorHora;
-    // calcularPago() lanza PagoInvalidoException
-}
+public abstract class Persona {
+    protected String nombre;
+    protected String id;
 
-public class Estudiante extends Persona implements Calificable {
-    private List<Double> calificaciones;
-    // calcularPromedio() lanza PromedioInvalidoException
+    public Persona(String nombre, String id) {
+        this.nombre = nombre;
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public abstract void mostrarInformacion();
 }
 ```
 
 #### Clase Curso:
 
 ```java
-public class Curso {
+package curso;
+import interfaces.Pagable;
+import java.util.List;
+import personas.Estudiante;
+import personas.Persona;
+
+public class Curso  {
     private String nombreCurso;
     private List<Estudiante> estudiantes;
-    private Persona profesorAsignado;
+    private Pagable profesor;
+
+    public Curso(String nombreCurso, List<Estudiante> estudiantes, Pagable profesor) {
+        this.nombreCurso = nombreCurso;
+        this.estudiantes = estudiantes;
+        this.profesor = profesor;
+    }
 
     public void mostrarInformacionCurso() {
-        // Muestra el nombre del curso, nombre del profesor y alumnos
+        System.out.println("Curso: " + nombreCurso);
+        System.out.println("Profesor asignado: ");
+        if (profesor instanceof Persona persona) {
+            persona.mostrarInformacion();
+        }
+        System.out.println("Estudiantes:");
+        for (Estudiante e : estudiantes) {
+            e.mostrarInformacion();
+        }
     }
 }
 ```
@@ -111,12 +137,12 @@ Los objetos `profTC`, `profPH`, `est1`, `est2` son instancias de clases hijas pe
 #### Definición:
 
 ```java
-public class PagoInvalidoException extends Exception {
-    public PagoInvalidoException(String msg) { super(msg); }
-}
+package excepciones;
 
-public class PromedioInvalidoException extends Exception {
-    public PromedioInvalidoException(String msg) { super(msg); }
+public class PagoInvalidoException extends RuntimeException {
+    public PagoInvalidoException(String mensaje) {
+        super(mensaje);
+    }
 }
 ```
 
