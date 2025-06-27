@@ -3,33 +3,36 @@
 
 ## Descripción General
 
-Este proyecto tiene como objetivo desarrollar un sistema de gestión académica en dos lenguajes de programación (Java y Python), aplicando conceptos fundamentales de la Programación Orientada a Objetos (POO), tales como clases, encapsulamiento, herencia, polimorfismo, interfaces y manejo de excepciones personalizadas.
+Este proyecto desarrolla un sistema de gestión académica implementado en Java y posteriormente traducido a Python. Utiliza Programación Orientada a Objetos (POO) y aplica conceptos fundamentales como clases, herencia, polimorfismo, interfaces y excepciones personalizadas.
 
 ---
 
 ## Objetivos
 
-- Desarrollar un sistema completo utilizando **Programación Orientada a Objetos (POO)**.
-- Aplicar los conceptos clave de POO:
-  - Clases e instancias
-  - Encapsulamiento
-  - Herencia
-  - Polimorfismo
-  - Abstracción
-  - Interfaces
-  - Excepciones personalizadas
-- Traducir el sistema de **Java a Python**, adaptando las estructuras del lenguaje.
+* Diseñar e implementar un sistema de gestión de cursos utilizando los principios de POO.
+* Aplicar:
+
+  * Clases e instancias
+  * Encapsulamiento
+  * Herencia
+  * Polimorfismo
+  * Interfaces
+  * Abstracción
+  * Excepciones personalizadas
+* Traducir el sistema de Java a Python adaptando su estructura.
 
 ---
 
-## Escenario del problema
+## Escenario del Problema
 
-La institución requiere un sistema para registrar profesores y estudiantes, así como administrar los cursos donde interactúan. El sistema debe:
+La institución necesita un sistema para registrar estudiantes y profesores, gestionar cursos, calcular salarios y promedios, y lanzar errores lógicos mediante excepciones personalizadas.
 
-- Registrar cursos y personas.
-- Calcular salarios de profesores (tiempo completo y por horas).
-- Calcular promedio de calificaciones de los estudiantes.
-- Lanzar **excepciones personalizadas** en casos de errores de lógica.
+El sistema debe:
+
+* Registrar cursos y personas.
+* Calcular el salario de profesores de tiempo completo y por horas.
+* Calcular el promedio de calificaciones de estudiantes.
+* Manejar errores mediante excepciones personalizadas.
 
 ---
 
@@ -38,39 +41,130 @@ La institución requiere un sistema para registrar profesores y estudiantes, as�
 ### 1. Clases e Interfaces
 
 #### Interfaces:
-- `Pagable` → método `calcularPago()` para profesores.
-- `Calificable` → método `calcularPromedio()` para estudiantes.
+
+* `Pagable` → `calcularPago()` (profesores)
+* `Calificable` → `calcularPromedio()` (estudiantes)
 
 #### Clase abstracta:
-- `Persona`:
-  - Atributos: `nombre`, `id`.
+
+```java
+public abstract class Persona {
+    protected String nombre;
+    protected String id;
+    // Constructor y getters
+}
+```
 
 #### Subclases de Persona:
-- `ProfesorTiempoCompleto`:
-  - Atributo adicional: `salarioMensual`.
-- `ProfesorPorHoras`:
-  - Atributos adicionales: `horasTrabajadas`, `pagoPorHora`.
-- `Estudiante`:
-  - Atributo adicional: `listaCalificaciones` (`List<Double>`).
 
-#### Clase:
-- `Curso`:
-  - Atributos: `nombreCurso`, `listaEstudiantes`, `profesorAsignado`.
+```java
+public class ProfesorTiempoCompleto extends Persona implements Pagable {
+    private double salarioMensual;
+    // calcularPago() lanza PagoInvalidoException
+}
+
+public class ProfesorPorHoras extends Persona implements Pagable {
+    private int horasTrabajadas;
+    private double pagoPorHora;
+    // calcularPago() lanza PagoInvalidoException
+}
+
+public class Estudiante extends Persona implements Calificable {
+    private List<Double> calificaciones;
+    // calcularPromedio() lanza PromedioInvalidoException
+}
+```
+
+#### Clase Curso:
+
+```java
+public class Curso {
+    private String nombreCurso;
+    private List<Estudiante> estudiantes;
+    private Persona profesorAsignado;
+
+    public void mostrarInformacionCurso() {
+        // Muestra el nombre del curso, nombre del profesor y alumnos
+    }
+}
+```
 
 ---
 
 ### 2. Polimorfismo
 
-- Procesamiento de listas de objetos `Persona` y `Curso` usando polimorfismo para mostrar su información.
+Se demuestra en el procesamiento de listas heterogéneas de objetos que heredan de `Persona`:
+
+```java
+List<Persona> personas = Arrays.asList(profTC, profPH, est1, est2);
+for (Persona p : personas) {
+    System.out.println("- " + p.getNombre());
+}
+```
+
+Los objetos `profTC`, `profPH`, `est1`, `est2` son instancias de clases hijas pero tratados como tipo base `Persona`.
 
 ---
 
 ### 3. Excepciones Personalizadas
 
-- `PagoInvalidadoException`: se lanza si el pago de un profesor es menor o igual a cero.
-- `PromedioInvalidoException`: se lanza si un estudiante no tiene calificaciones registradas.
+#### Definición:
+
+```java
+public class PagoInvalidoException extends Exception {
+    public PagoInvalidoException(String msg) { super(msg); }
+}
+
+public class PromedioInvalidoException extends Exception {
+    public PromedioInvalidoException(String msg) { super(msg); }
+}
+```
+
+#### Uso:
+
+```java
+if (salarioMensual <= 0) throw new PagoInvalidoException("Pago inválido");
+if (calificaciones.isEmpty()) throw new PromedioInvalidoException("No hay calificaciones");
+```
 
 ---
 
-## Estructura del Proyecto
+## Ejemplo de Ejecución en Java (Main.java)
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        try {
+            ProfesorTiempoCompleto profTC = new ProfesorTiempoCompleto("Ana", "P001", 15000);
+            ProfesorPorHoras profPH = new ProfesorPorHoras("Luis", "P002", 40, 200);
+
+            Estudiante est1 = new Estudiante("Carlos", "E001", Arrays.asList(8.5, 9.0, 7.5));
+            Estudiante est2 = new Estudiante("Maria", "E002", Arrays.asList(9.5, 8.0, 10.0));
+
+            List<Estudiante> estudiantes = Arrays.asList(est1, est2);
+
+            Curso curso1 = new Curso("Programación OO", estudiantes, profTC);
+            Curso curso2 = new Curso("Bases de Datos", estudiantes, profPH);
+
+            curso1.mostrarInformacionCurso();
+            System.out.println();
+            curso2.mostrarInformacionCurso();
+
+            System.out.println("\nPagos y promedios:");
+            System.out.println(profTC.getNombre() + " - Pago: $" + profTC.calcularPago());
+            System.out.println(profPH.getNombre() + " - Pago: $" + profPH.calcularPago());
+
+            System.out.println(est1.getNombre() + " - Promedio: " + est1.calcularPromedio());
+            System.out.println(est2.getNombre() + " - Promedio: " + est2.calcularPromedio());
+
+        } catch (PagoInvalidoException | PromedioInvalidoException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+}
+```
+
+
+
+
 
